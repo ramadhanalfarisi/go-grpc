@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option go_package = "./models";
+
+package models;
+
+message Product {
+    string ProductID  = 1;
+    string ProductName = 2;
+    float ProductPrice = 3;
+    string ProductCategory = 4;
+    string CreatedAt = 5;
+    optional string UpdatedAt = 6;
+}
+
+message Response {
+    int32 Code = 1;
+    string Status = 2;
+    repeated string Message = 3;
+}
+
+message ProductList {
+    repeated Product list = 1;
+}
+
+message GetallRequest {
+    optional int64 page = 1;
+    optional int64 limit = 2;
+}
+
+service Products {
+    rpc Insert(Product) returns (Response) {}
+    rpc GetAll(GetallRequest) returns (ProductList) {}
+}
